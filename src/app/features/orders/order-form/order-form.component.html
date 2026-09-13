@@ -1,0 +1,28 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="order-form">
+  <h3>Nuevo pedido</h3>
+
+  <div formArrayName="items" class="items">
+    @for (item of items.controls; track item; let i = $index) {
+      <div [formGroupName]="i" class="item-row">
+        <label>
+          Producto (ID)
+          <input type="number" formControlName="productId" min="1" />
+        </label>
+        <label>
+          Cantidad
+          <input type="number" formControlName="quantity" min="1" />
+        </label>
+        <button type="button" class="remove-btn" (click)="removeItem(i)" [disabled]="items.length === 1">
+          Quitar
+        </button>
+      </div>
+    }
+  </div>
+
+  <button type="button" class="add-btn" (click)="addItem()">+ Agregar producto</button>
+
+  <div class="actions">
+    <button type="button" class="cancel-btn" (click)="cancelled.emit()">Cancelar</button>
+    <button type="submit" class="submit-btn">Crear pedido</button>
+  </div>
+</form>

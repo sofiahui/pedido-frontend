@@ -1,0 +1,96 @@
+.shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f5f6f8;
+}
+
+.shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  background: #1b1f3b;
+  color: #fff;
+
+  .brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+  }
+}
+
+.user-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+
+  .user-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+
+  .user-roles {
+    font-size: 0.75rem;
+    color: #b7bce0;
+  }
+}
+
+.logout-btn {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
+  color: #fff;
+  padding: 0.4rem 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+.shell-body {
+  flex: 1;
+  display: flex;
+}
+
+.shell-nav {
+  width: 200px;
+  background: #fff;
+  border-right: 1px solid #e2e4ea;
+  padding: 1.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+
+  a {
+    padding: 0.6rem 1.5rem;
+    color: #3c4257;
+    text-decoration: none;
+    font-size: 0.92rem;
+
+    &:hover {
+      background: #f0f1f6;
+    }
+
+    &.active {
+      background: #eef0ff;
+      color: #4338ca;
+      font-weight: 600;
+      border-right: 3px solid #4338ca;
+    }
+  }
+}
+
+.shell-content {
+  flex: 1;
+  padding: 2rem;
+}

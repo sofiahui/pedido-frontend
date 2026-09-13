@@ -1,0 +1,58 @@
+<h1>Hola, {{ authService.displayName }}</h1>
+
+@if (loading()) {
+  <p class="hint">Cargando actividad…</p>
+} @else if (error()) {
+  <p class="error">{{ error() }}</p>
+} @else {
+  <div class="cards">
+    @if (authService.hasRole('Admin')) {
+      <div class="card">
+        <span class="card-label">Pedidos totales</span>
+        <span class="card-value">{{ orders().length }}</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Ventas acumuladas</span>
+        <span class="card-value">${{ totalSales() | number: '1.0-0' }}</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Pedidos activos</span>
+        <span class="card-value">{{ activeOrders().length }}</span>
+      </div>
+    } @else if (authService.hasRole('Operador')) {
+      <div class="card">
+        <span class="card-label">Pedidos activos</span>
+        <span class="card-value">{{ activeOrders().length }}</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Pendientes de aceptar</span>
+        <span class="card-value">{{ pendingOrders().length }}</span>
+      </div>
+    } @else {
+      <div class="card">
+        <span class="card-label">Mis pedidos</span>
+        <span class="card-value">{{ orders().length }}</span>
+      </div>
+    }
+  </div>
+
+  <section class="recent">
+    <h2>{{ authService.hasRole('Cliente') && !authService.hasRole('Admin', 'Operador') ? 'Mis últimos pedidos' : 'Actividad reciente' }}</h2>
+
+    @if (recentOrders().length === 0) {
+      <p class="hint">Todavía no hay pedidos registrados.</p>
+    } @else {
+      <ul class="order-list">
+        @for (order of recentOrders(); track order.id) {
+          <li>
+            <span class="order-id">#{{ order.id }}</span>
+            <app-order-status-badge [status]="order.status" />
+            <span class="order-total">${{ order.total | number: '1.0-0' }}</span>
+          </li>
+        }
+      </ul>
+    }
+
+    <a routerLink="/orders" class="link">Ver todos los pedidos →</a>
+  </section>
+}

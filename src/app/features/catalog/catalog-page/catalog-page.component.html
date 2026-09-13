@@ -1,0 +1,31 @@
+<div class="page-header">
+  <h1>Catálogo</h1>
+  @if (canManage && !showForm()) {
+    <button type="button" class="new-btn" (click)="startCreate()">+ Nuevo producto</button>
+  }
+</div>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (showForm()) {
+  <app-product-form [product]="editingProduct()" (submitted)="save($event)" (cancelled)="cancelForm()" />
+}
+
+@if (loading()) {
+  <p class="hint">Cargando catálogo…</p>
+} @else if (products().length === 0) {
+  <p class="hint">Todavía no hay productos registrados.</p>
+} @else {
+  <div class="product-grid">
+    @for (product of products(); track product.id) {
+      <app-product-card
+        [product]="product"
+        [canManage]="canManage"
+        (edit)="startEdit($event)"
+        (remove)="remove($event)"
+      />
+    }
+  </div>
+}

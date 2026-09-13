@@ -1,0 +1,20 @@
+<div class="page-header">
+  <h1>Pedidos</h1>
+  @if (canCreate && !showForm()) {
+    <button type="button" class="new-btn" (click)="showForm.set(true)">+ Nuevo pedido</button>
+  }
+</div>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (showForm()) {
+  <app-order-form (submitted)="createOrder($event)" (cancelled)="showForm.set(false)" />
+}
+
+@if (loading()) {
+  <p class="hint">Cargando pedidos…</p>
+} @else {
+  <app-order-list [orders]="orders()" [canChangeStatus]="canChangeStatus" (statusChange)="changeStatus($event)" />
+}

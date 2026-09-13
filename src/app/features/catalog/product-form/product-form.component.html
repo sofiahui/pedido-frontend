@@ -1,0 +1,29 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="product-form">
+  <h3>{{ isEditing ? 'Editar producto' : 'Nuevo producto' }}</h3>
+
+  <label>
+    Nombre
+    <input type="text" formControlName="name" />
+  </label>
+
+  <label>
+    Descripción
+    <textarea formControlName="description" rows="2"></textarea>
+  </label>
+
+  <div class="row">
+    <label>
+      Precio
+      <input type="number" formControlName="price" min="0" />
+    </label>
+    <label>
+      Stock
+      <input type="number" formControlName="stock" min="0" />
+    </label>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="cancel-btn" (click)="cancelled.emit()">Cancelar</button>
+    <button type="submit" class="submit-btn">{{ isEditing ? 'Guardar cambios' : 'Crear producto' }}</button>
+  </div>
+</form>

@@ -1,0 +1,45 @@
+@if (orders.length === 0) {
+  <p class="hint">No hay pedidos para mostrar.</p>
+} @else {
+  <table class="order-table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Cliente</th>
+        <th>Estado</th>
+        <th>Items</th>
+        <th>Total</th>
+        <th>Creado</th>
+        @if (canChangeStatus) {
+          <th>Acción</th>
+        }
+      </tr>
+    </thead>
+    <tbody>
+      @for (order of orders; track order.id) {
+        <tr>
+          <td>#{{ order.id }}</td>
+          <td class="customer">{{ order.customerId }}</td>
+          <td><app-order-status-badge [status]="order.status" /></td>
+          <td>{{ order.items.length }}</td>
+          <td>${{ order.total | number: '1.0-0' }}</td>
+          <td>{{ order.createdAt | date: 'short' }}</td>
+          @if (canChangeStatus) {
+            <td>
+              @if (nextStatuses(order).length > 0) {
+                <select (change)="onStatusSelected(order, $any($event.target).value)">
+                  <option value="">Cambiar a…</option>
+                  @for (next of nextStatuses(order); track next) {
+                    <option [value]="next">{{ next }}</option>
+                  }
+                </select>
+              } @else {
+                <span class="hint">—</span>
+              }
+            </td>
+          }
+        </tr>
+      }
+    </tbody>
+  </table>
+}

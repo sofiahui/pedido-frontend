@@ -1,0 +1,18 @@
+<div class="product-card" [class.low-stock]="product.stock === 0">
+  <div class="product-header">
+    <h3>{{ product.name }}</h3>
+    <span class="price">${{ product.price | number: '1.0-0' }}</span>
+  </div>
+  <p class="description">{{ product.description || 'Sin descripción' }}</p>
+  <div class="stock">
+    <span>Stock:</span>
+    <strong>{{ product.stock }}</strong>
+  </div>
+
+  @if (canManage) {
+    <div class="actions">
+      <button type="button" class="edit-btn" (click)="edit.emit(product)">Editar</button>
+      <button type="button" class="delete-btn" (click)="remove.emit(product)">Eliminar</button>
+    </div>
+  }
+</div>
