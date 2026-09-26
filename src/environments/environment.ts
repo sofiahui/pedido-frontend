@@ -1,11 +1,11 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'http://localhost:8080',
+  apiBaseUrl: 'https://2pfy1s9tii.execute-api.us-east-1.amazonaws.com',
   azureAd: {
-    clientId: 'a2564ef7-dfb3-4ab3-a959-e987e051e58c',
-    tenantId: 'a49d895e-910c-431b-a321-f86038460e12',
+    clientId: 'e39233a2-6c2a-4465-bbb0-538718a6d021',
+    tenantId: '391785ea-8a93-4b03-aa6f-34f76498a5ad',
     redirectUri: 'http://localhost:4200/auth/callback',
     postLogoutRedirectUri: 'http://localhost:4200/login',
-    apiScope: 'api://0a2fa07e-9f53-4caa-af3e-520c0dc8b941/access_as_user',
+    apiScope: 'api://9f968a39-1844-4166-ada1-5833116eda90/access_as_user',
   },
 };
