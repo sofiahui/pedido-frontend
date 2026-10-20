@@ -1,6 +1,9 @@
 <div class="product-card" [class.low-stock]="product.stock === 0">
   <div class="product-header">
-    <h3>{{ product.name }}</h3>
+    <div class="title">
+      <h3>{{ product.name }}</h3>
+      <span class="product-id">ID: {{ product.id }}</span>
+    </div>
     <span class="price">${{ product.price | number: '1.0-0' }}</span>
   </div>
   <p class="description">{{ product.description || 'Sin descripción' }}</p>
